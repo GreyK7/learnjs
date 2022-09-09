@@ -1,0 +1,104 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+.box {
+    width: 100px;
+    height: 20px;
+    margin-right: 5px;
+    background-color: orange;
+    border-radius: 5px;
+}
+
+.one {
+    margin-right: -2px;
+    animation: spin 2s linear infinite;
+    transform-origin: center left;
+}
+
+.two {
+    margin-right: 98px;
+    animation: spin2 2s linear infinite;
+    animation-delay: 0.5s;
+    transform-origin: center right;
+}
+
+.three {
+    animation: spin 2s linear infinite;
+    animation-delay: 3.2s;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(360deg);
+    }
+
+    50% {
+        transform: rotate(370deg);
+    }
+
+    75% {
+        transform: rotate(360deg);
+    }
+
+    100% {
+        transform: rotate(360deg); 
+    }
+}
+
+@keyframes spin2 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-180deg);
+    }
+
+    50% {
+        transform: rotate(-190deg);
+    }
+
+    75% {
+        transform: rotate(-180deg);
+    }
+
+    100% {
+        transform: rotate(-180deg); 
+    }
+}
+
+.b {
+    width: 250px;
+    height: 250px;
+    background-color: black;
+    position: relative;
+}
+
+.a {
+    width: 100%;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+    top: 20px;
+}
+
+.c {
+    width: 100%;
+    height: 50px;
+    background-color: green;
+}
