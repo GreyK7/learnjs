@@ -136,3 +136,39 @@ console.log(personaMovieDB);
 // console.log( NaN || null && !3 && undefined || 5); //5
  
 // console.log( 5 === 5 && 3 > 1 || 5); //true
+
+
+
+function test (x, n) {
+    let res = x;
+    for (let i = 0; i < n - 1; i++) {
+        res *= x;
+    }
+    return res;
+}
+
+let sayHi = function () {
+    console.log("Hello world!");
+}
+
+let test2 = sayHi();
+
+console.log(test(1, 100));
+console.log(test2);
+
+
+function getMathResult(first, second) {
+    if (Number.isFinite(second) && second > 0) {
+       let result = String(first);
+       let counter = first;
+        for (let i = 1; i < second; i++) {
+            counter += first;
+            result += "---" + counter;
+        }
+        return result;
+    } else {
+        return first;
+    }
+}
+
+console.log(getMathResult(10, '5'));
