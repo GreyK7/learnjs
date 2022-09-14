@@ -1,41 +1,81 @@
 "use strict";
 
-let numberOfFilms,
-    lastFilm,
-    markFilm;
-
-numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "0");
-
-
-const personaMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-};
-
-// for (let i = 0; i < numberOfFilms; i++ ) {
-//     while(true){
-//         lastFilm = prompt("Odin iz filmov?", "");
-//         if (lastFilm !== "" && lastFilm !== null && lastFilm.length < 50) {
-//             break;
-//         }    
-//     }
+// let numberOfFilms;
     
-//     markFilm = prompt ("Na skol`ko ocenite ego?", "");
-//     personaMovieDB.movies[lastFilm] = markFilm;
+
+// const personaMovieDB = {
+//     count: 0,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: false
+// };
+
+
+// function start() {
+//     while(numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms)) {
+//         numberOfFilms = +prompt("Сколько фильмов вы посмотрели?", "");
+//     }
+//     personaMovieDB.count = numberOfFilms;
 // }
 
-if ( personaMovieDB["count"] < 10 ) {
-    console.log("Просмотренно довольно мало фильмов");
-} else if (personaMovieDB["count"] > 9 && personaMovieDB["count"] < 31 ) {
-    console.log("Вы классический зритель");
-} else {
-    console.log("Вы киноман");
-}
+// // function checkInput() {
+    
+// // }
 
-console.log(personaMovieDB);
+// function rememberFilms() {
+//     let lastFilm,
+//         markFilm;
+//     for (let i = 0; i < personaMovieDB["count"]; i++ ) {
+//         while(true){
+//             lastFilm = prompt("Odin iz filmov?", "").trim();
+//             if (lastFilm !== "" && lastFilm !== null && lastFilm.length < 50) {
+//                 break;
+//             }    
+//         }
+//         markFilm = prompt ("Na skol`ko ocenite ego?", "");
+//         personaMovieDB.movies[lastFilm] = markFilm;
+//     }
+// }
+
+// function defineLvl() {
+//     if ( personaMovieDB.count < 10 ) {
+//         console.log("Просмотренно довольно мало фильмов");
+//     } else if (personaMovieDB.count > 9 && personaMovieDB.count < 31 ) {
+//         console.log("Вы классический зритель");
+//     } else {
+//         console.log("Вы киноман");
+//     }
+// }
+
+// function showMyDb() {
+//     if (!personaMovieDB["private"]) {
+//         console.log(personaMovieDB);
+//     }
+// }
+
+// function writeYourGenres() {
+//     for (let i = 1; i < 4; i++) {
+//         while (true) {
+//             personaMovieDB["genres"][i-1] = prompt(`Ваш любимый жанр под номером ${i}`, "");
+//             console.log(personaMovieDB["genres"][i-1]);
+//             if (personaMovieDB["genres"][i-1] != "" && personaMovieDB["genres"][i-1] != null) {
+//                 break;
+//             }
+//         }
+//     }
+// }
+
+// start();
+// rememberFilms();
+// defineLvl();
+// showMyDb();
+// writeYourGenres();
+
+
+
+
+
 
 // for (let i = 0; i < 1; i++) {
 //     let j = 1;
@@ -139,36 +179,60 @@ console.log(personaMovieDB);
 
 
 
-function test (x, n) {
-    let res = x;
-    for (let i = 0; i < n - 1; i++) {
-        res *= x;
-    }
-    return res;
-}
+// function test (x, n) {
+//     let res = x;
+//     for (let i = 0; i < n - 1; i++) {
+//         res *= x;
+//     }
+//     return res;
+// }
 
-let sayHi = function () {
-    console.log("Hello world!");
-}
+// let sayHi = function () {
+//     console.log("Hello world!");
+// }
 
-let test2 = sayHi();
+// let test2 = sayHi();
 
-console.log(test(1, 100));
-console.log(test2);
+// console.log(test(1, 100));
+// console.log(test2);
 
 
-function getMathResult(first, second) {
-    if (Number.isFinite(second) && second > 0) {
-       let result = String(first);
-       let counter = first;
-        for (let i = 1; i < second; i++) {
-            counter += first;
-            result += "---" + counter;
-        }
-        return result;
+// function getMathResult(first, second) {
+//     if (Number.isFinite(second) && second > 0) {
+//        let result = String(first);
+//        let counter = first;
+//         for (let i = 1; i < second; i++) {
+//             counter += first;
+//             result += "---" + counter;
+//         }
+//         return result;
+//     } else {
+//         return first;
+//     }
+// }
+
+// console.log(getMathResult(10, '5'));
+
+// let test123 = function (a, func) {
+//     return func(a);
+// };
+
+// console.log(test123(7, a => a * a));
+
+
+// let h = 12;
+
+// console.log(typeof(h.toString()));
+
+
+function getCoupeNumber(place) {
+    if (place == 0 || place > 36) {
+        return "Таких мест в вагоне не существует";
+    } else if (typeof(place) == 'number' && place > 0 && Number.isInteger(place)) {
+        return Math.ceil(place / 4);
     } else {
-        return first;
-    }
+        return "Ошибка. Проверьте правильность введенного номера места";
+   }
 }
 
-console.log(getMathResult(10, '5'));
+console.log(getCoupeNumber(-10.5));
