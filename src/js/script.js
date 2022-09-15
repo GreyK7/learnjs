@@ -236,3 +236,72 @@ function getCoupeNumber(place) {
 }
 
 console.log(getCoupeNumber(-10.5));
+
+
+let t = undefined;
+
+console.log(t == undefined);
+
+
+function findMaxNumber(a, b, c, d) {
+    if ((a === undefined || b === undefined || c === undefined || d === undefined) || (!Number.isFinite(a + b + c + d))) {
+        return 0;
+    } else {
+        return Math.max(a, b, c, d);
+    }
+}
+
+console.log(findMaxNumber(1, 5, "6", 11));
+
+
+function getTimeFromMinutes(a) {
+    if (typeof(a) != "number" || !Number.isInteger(a) || a < 0) {
+        return "Ошибка, проверьте данные";
+    } else {
+        let hours = Math.floor(a / 60),
+        minutes = a % 60,
+        txt = '';
+        if ( hours == 1) {
+            txt = "час";
+        } else if (hours > 1 && hours < 5) {
+            txt = "часа";
+        } else {
+            txt = "часов";
+        }
+        return `Это ${hours} ${txt} и ${minutes} минут`;
+    }
+}
+
+
+console.log(getTimeFromMinutes("gg"));
+// let a = 1, b = undefined, c = 3, d = 5;
+
+// let f = a + b + c + d;
+
+// console.log(f);
+
+// console.log(Number.isNaN(f));
+
+///FIBONA4I
+function fiboLine(num) {
+    let line = [0, 1],
+        res = "";
+    if (typeof(num) != "number" || !Number.isInteger(num) || num <= 0) {
+        return "";
+    } else if (num <= 2) {
+        for (let i = 0; i < num; i++) {
+            res += line[i] + " "; 
+        }
+        return res.trimEnd();
+    } else {
+        for (let i = 2; i < num; i ++) {
+            line[i] = (+line[i-1] + +line[i-2]);
+        }
+        for (let i = 0; i < line.length; i++) {
+            res += line[i] + " ";
+        }
+        return res.trimEnd();
+    } 
+}
+
+console.log(fiboLine(7));
