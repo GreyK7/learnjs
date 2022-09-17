@@ -295,7 +295,7 @@ function fiboLine(num) {
         return res.trimEnd();
     } else {
         for (let i = 2; i < num; i ++) {
-            line[i] = (+line[i-1] + +line[i-2]);
+            line[i] = (line[i-1] + line[i-2]);
         }
         for (let i = 0; i < line.length; i++) {
             res += line[i] + " ";
@@ -305,3 +305,67 @@ function fiboLine(num) {
 }
 
 console.log(fiboLine(7));
+
+
+/// TEST OBJECT
+
+let user = {};
+
+user["name"] = "John";
+user["surname"] = "Smith";
+console.log(user);
+user.name = "Pete";
+console.log(user);
+delete user.name;
+delete user.surname;
+console.log(user);
+
+let isEmpthy = function(obj) {
+    for (let key in obj) {
+        if ( key ) {
+            return false;
+        }
+    }
+    return true;
+};
+
+console.log(isEmpthy(user));
+
+
+let salaries = {
+    John: 100,
+    Ann: 160,
+    Pete: 130
+  };
+
+function sumSalary(obj) {
+    let sum = 0;
+    for (let key in obj)  {
+        sum += obj[key];
+    }
+    return sum;
+}
+
+console.log(sumSalary(salaries));
+
+
+let menu = {
+    width: 200,
+    height: 300,
+    title: "My menu"
+  };
+
+function multiplyNumeric(obj) {
+    for (let key in obj) {
+        if (typeof obj[key] === "number") {
+            obj[key] *= 2;
+        }
+    }
+}
+
+multiplyNumeric(menu);
+
+console.log(menu);
+
+
+
