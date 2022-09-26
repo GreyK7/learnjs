@@ -367,5 +367,218 @@ multiplyNumeric(menu);
 
 console.log(menu);
 
+///game
+let innerHi = () => console.log(this.name);
+const testObj = {
+    name: 'gor',
+    age: 19,
+    obj: {
+        color: "blue",
+        width: "100px",
+        newObj: {
+            kek: 4
+        }
+    },
+    sayHi() {
+        
+        innerHi(); 
+    }
+};
 
+
+
+testObj.sayHi();
+
+const br = Object.assign({}, testObj);
+
+for (let key in testObj) {
+    console.log(testObj[key]);
+}
+
+console.log(br === testObj);
+
+br.obj["color"] = "white";
+
+console.log(br["obj"]);
+console.log(testObj["obj"]);
+
+
+/// test "this"
+
+// const calculator = {
+//     read() {
+//         this.first = +prompt("Enter first value: ", "");
+//         this.second = +prompt("Enter second value: ", "");
+//     },
+
+//     sum() {
+//         return this.first + this.second;
+//     },
+
+//     mul() {
+//         return this.first * this.second; 
+//     }
+// };
+
+
+function Calculator() {
+    this.read = function() {
+        this.first = +prompt("Enter first value: ", "");
+        this.second = +prompt("Enter second value: ", "");
+    };
+
+    this.sum = function() {
+        return this.first + this.second;
+    };
+
+    this.mul = function() {
+        return this.first * this.second; 
+    };
+}
+
+const calc = new Calculator();
+
+function Accumulator(startingValue) {
+    this.value = startingValue;
+
+    this.read = function() {
+        this.value += +prompt("Enter new value", "");
+    };
+}
+
+let tester = new Accumulator(5);
+
+// Zada4a iz sobesedivaniya 2
+const someString = 'This is some strange string';
+
+function reverse(str) {
+    let newString = '';
+    for (let i = str.length - 1; i > -1; i--) {
+        newString += str[i];
+    }
+    return newString;
+}
+
+console.log(reverse(someString));
+
+//Bankomat
+const baseCurrencies = ['USD', 'EUR'];
+const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+
+let accessCurrencies = [];
+
+function sumArr(sumArr, arr) {
+    for (let elem of arr) {
+        sumArr.push(elem);
+    }
+}
+
+sumArr(accessCurrencies, baseCurrencies);
+sumArr(accessCurrencies, additionalCurrencies);
+
+// console.log(accessCurrencies);
+
+function availableCurr(arr, missingCurr) {
+    if (arr.length == 0) {
+        return 'Нет доступных валют';
+    }
+    let answ = 'Доступные валюты:';
+    for (let elem of arr) {
+        if (elem != missingCurr) {
+            answ += '\n' + elem;
+        }
+    }
+    return answ;
+}
+
+console.log(availableCurr(accessCurrencies, 'CNY'));
+
+
+//Ras4et plowadi pomeweniya massivi + object
+
+const shoppingMallData = {
+    shops: [
+        {
+            width: 10,
+            length: 5
+        },
+        {
+            width: 15,
+            length: 7
+        },
+        {
+            width: 20,
+            length: 5
+        },
+        {
+            width: 8,
+            length: 10
+        }
+    ],
+    height: 5,
+    moneyPer1m3: 30,
+    budget: 50000
+}
+
+function isBudgetEnough(data) {
+    let area = 0;
+    data.shops.forEach(value => {
+        area += data.height * value.width * value.length;
+    });
+    return ((data.budget - area * data.moneyPer1m3) >= 0) ? 'Бюджета достаточно' : 'Бюджета недостаточно';
+}
+
+console.log(isBudgetEnough(shoppingMallData));
+
+//zada4a na formirovnie komand po 3 4eloveka
+
+const students = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'Sam'];
+
+function sortStudentsByGroups(arr) {
+    let a = [], b = [], c = [], d = [];
+    arr.sort();
+    for (let i = 0; i < arr.length; i++) {
+        if (i < 3) {
+            a.push(arr[i]);
+        } else if (i < 6) {
+            b.push(arr[i]);
+        } else if (i < 9) {
+            c.push(arr[i]);
+        } else {
+            d.push(arr[i]);
+        }
+    }
+    d = d.join(', ');
+    return [a, b, c, (d.length === 0) ? 'Оставшиеся студенты: -' : `Оставшиеся студенты: ${d}`];
+}
+
+console.log(sortStudentsByGroups(students));
+// function sortStudentsByGroups(arr) {
+//     let result = [[], [], []];
+//     let leftPeople = 'Оставшиеся студенты:';
+//     let counterI = 0;
+//     let counterJ = 0;
+//     arr.sort();
+//     arr.forEach(item => {
+//         if (counterI < 3 && counterJ < 3) {
+//             result[counterI].push(item);
+//             counterJ++;
+//         } else if (++counterI < 3) {
+//             counterJ = 1;
+//             result[counterI].push(item);
+//         } else {
+//             if (counterJ > 3) {
+//                 leftPeople += `, ${item}`;
+//             } else {
+//                 leftPeople += ` ${item}`;
+//             }
+//             counterJ++;
+//         }
+//     });
+//     if (leftPeople.length === 20) {
+//         leftPeople += ' -';
+//     } 
+//     result.push(leftPeople);
+//     return result;
+// }
 
