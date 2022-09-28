@@ -582,3 +582,194 @@ console.log(sortStudentsByGroups(students));
 //     return result;
 // }
 
+const family = {
+    ivan: 'person',
+    ann: 'person',
+    dog: 'animal',
+    cat: 'animal',
+};
+
+let names = [];
+
+for (let key in family) {
+    if (family[key] == 'person') {
+        names.push(key);
+    }
+}
+
+console.log(names);
+
+
+const Names = ['Peter', 'Andrew', 'Ann', 'Mark', 'Josh', 'Sandra', 'Cris', 'Bernard', 'Takesi', 'Sam', 'Sam'];
+
+let newNames = [];
+
+Names.forEach(item => {
+    if (item[0] == 'A') {
+        newNames.push(item);
+    }
+});
+
+console.log(newNames);
+
+const Numberss = [1, 2, 3, 4, 5];
+
+console.log(Numberss.map(item => 7));
+
+
+//cammelCASE
+
+function camelize(str) {
+    let arr = str.split('-');
+    for (let i = 1; i < arr.length; i++) {
+        arr[i] = `${arr[i][0].toUpperCase() + arr[i].slice(1,)}`;
+    }
+    return arr.join('');
+}
+
+console.log(camelize("background-color"));
+console.log(camelize("list-style-image"));
+console.log(camelize("-webkit-transition"));
+
+//Фильтрация по диапазону
+
+let arr = [5, 3, 8, 1];
+
+let filterRange = function(arr, a, b) {
+    return arr.filter((item => item >= a && item <= b));
+};
+
+let filtered = filterRange(arr, 1, 4);
+
+console.log( filtered ); // 3,1 (совпадающие значения)
+console.log( arr ); // 5,3,8,1 (без изменений)
+
+
+//Фильтрация по диапазону "на месте"
+
+let arrey = [5, 3, 8, 1, 5, 5];
+
+let filterRangeInPlace = function(arr, a, b) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < a || arr[i] > b) {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+};
+
+filterRangeInPlace(arrey, 1, 4); // удалены числа вне диапазона 1..4
+
+console.log( arrey ); // [3, 1]
+
+
+// Сортировать в порядке по убыванию
+let arre = [5, 2, 1, -10, 8];
+
+arre.sort(function(a, b) {
+    return b - a;
+});
+
+console.log( arre ); // 8, 5, 2, 1, -10
+
+// Рекурссия для развёртывания глубокого массива в один
+const arrtem = [1, 2, [3, 4, [5, 6]]];
+
+function reWork(arr, d) {
+    return d > 0 ? arr.reduce((acc, value) => acc.concat(Array.isArray(value) ? 
+    reWork(value, d - 1) : value), []) : arr.slice();
+}
+
+console.log(reWork(arrtem, Infinity));
+
+
+//Скопировать и отсортировать
+
+let massive = ["HTML", "JavaScript", "CSS"];
+
+let copySorted = function (arr) {
+    return [...arr].sort();
+};
+
+let sorted = copySorted(massive);
+
+console.log(sorted);
+console.log(massive);
+
+
+//Создать расширяемый калькулятор
+
+function Calculator() {
+    this.methods = {
+        '+': (a, b) => a + b,
+        '-': (a, b) => a - b,
+    };
+
+    this.addMethod = function (op, method) {
+        this.methods[op] = method;
+    };
+
+    this.calculate = function(str) {
+        let arr = str.split(' ');     
+        if (!this.methods[arr[1]] || isNaN(arr[0]) || isNaN(arr[2])) {
+            return NaN;
+        } else {
+
+            return this.methods[arr[1]](+arr[0], +arr[2]);
+        }
+    };
+}
+
+let cal = new Calculator();
+
+console.log(cal.calculate("3 + 7"));
+
+
+
+
+//Отсортировать пользователей по возрасту
+
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let someAr = [ vasya, petya, masha ];
+
+function sortByAge(arr) {
+    arr.sort((a, b) => a.age - b.age);
+}
+
+sortByAge(someAr);
+
+console.log(someAr[0].name); // Вася
+console.log(someAr[1].name); // Маша
+console.log(someAr[2].name);
+
+
+
+//Трансформировать в массив имён
+
+let users = [ vasya, petya, masha ];
+
+let n = users.map( item => item.name);
+
+console.log( n );
+
+
+//Трансформировать в объекты
+
+let Vasya = { name: "Вася", surname: "Пупкин", id: 1 };
+let Petya = { name: "Петя", surname: "Иванов", id: 2 };
+let Masha = { name: "Маша", surname: "Петрова", id: 3 };
+
+let Users = [ Vasya, Petya, Masha ];
+
+let usersMapped = Users.map(item => ({ 
+        fullName: `${item.name} ${item.surname}`,
+        id: item.id,
+    })
+);
+
+console.log( usersMapped[0].id ); // 1
+console.log( usersMapped[0].fullName ) ;// Вася Пупкин
+console.log(Users);
