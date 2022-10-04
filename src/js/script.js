@@ -731,7 +731,7 @@ console.log(cal.calculate("3 + 7"));
 
 let vasya = { name: "Вася", age: 25 };
 let petya = { name: "Петя", age: 30 };
-let masha = { name: "Маша", age: 28 };
+let masha = { name: "Маша", age: 29 };
 
 let someAr = [ vasya, petya, masha ];
 
@@ -756,6 +756,19 @@ let n = users.map( item => item.name);
 console.log( n );
 
 
+//Получить средний возраст
+
+function getAverageAge(arr) {
+    return arr.reduce((sum, value) => sum + value.age, 0) / arr.length;
+}
+
+console.log( getAverageAge(someAr) );
+
+
+
+
+
+
 //Трансформировать в объекты
 
 let Vasya = { name: "Вася", surname: "Пупкин", id: 1 };
@@ -773,3 +786,126 @@ let usersMapped = Users.map(item => ({
 console.log( usersMapped[0].id ); // 1
 console.log( usersMapped[0].fullName ) ;// Вася Пупкин
 console.log(Users);
+
+
+//Создайте объект с ключами из массива
+
+let userS = [
+    {id: 'john', name: "John Smith", age: 20},
+    {id: 'ann', name: "Ann Smith", age: 24},
+    {id: 'pete', name: "Pete Peterson", age: 31},
+  ];
+
+
+function groupById(arr) {
+    return arr.reduce((obj, item) => {
+        obj[item['id']] = item;
+        return obj;
+    }, {});
+}
+
+
+let usersById = groupById(userS);
+
+console.log(usersById);
+
+
+//Оставить уникальные элементы массива
+
+function unique(arr) {
+    let newArr = [];
+    arr.forEach(item => !newArr.includes(item) && newArr.push(item));
+    return newArr;    
+}
+  
+let strings = ["кришна", "кришна", "харе", "харе",
+    "харе", "харе", "кришна", "кришна", ":-O"
+  ];
+
+console.log(unique(strings));
+
+
+//Фильтрация уникальных элементов массива
+
+function unique(arr) {
+    return Array.from(new Set(arr));
+  }
+  
+let values = ["Hare", "Krishna", "Hare", "Krishna",
+    "Krishna", "Krishna", "Hare", "Hare", ":-O"
+];
+  
+console.log( unique(values) ); // Hare,Krishna,:-O
+
+
+// Отфильтруйте анаграммы
+
+
+let anagramm = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+const aclean = function(arr) {
+    let set = new Set();
+    let answ = [];
+    arr.forEach(value => {
+        let trans = value.toUpperCase().split('').sort().join('');
+        if (!set.has(trans)) {
+            set.add(trans);
+            answ.push(value);
+        }
+    });
+    return answ;
+};
+
+console.log( aclean(anagramm) );
+
+
+// Перебираемые ключи
+
+let map = new Map();
+
+map.set("name", "John");
+
+let keys = Array.from(map.keys());
+
+// Error: keys.push is not a function
+// Ошибка: keys.push -- это не функция
+keys.push("more");
+
+console.log(keys);
+
+
+
+//Сумма свойств объекта
+
+let sal = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+  };
+  
+const sumSalaries = function(obj) {
+    let sum = 0;
+    for (let val of Object.values(obj)) {
+        sum += val;
+    }
+    return sum;
+};
+
+console.log( sumSalaries(sal) );
+
+
+//
+
+
+let us = {
+    name: 'John',
+    age: 30
+  };
+  
+
+const count = function(obj) {
+    return Object.keys(obj).length;
+};
+
+
+console.log( count(us) ); // 2
