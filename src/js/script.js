@@ -909,3 +909,39 @@ const count = function(obj) {
 
 
 console.log( count(us) ); // 2
+
+
+///Деструктурирующее присваивание
+
+let useR = { namE: "John", years: 30 };
+
+let {namE, years: age, isAdmin = false} = useR;
+
+console.log( namE ); // John
+console.log( age ); // 30
+console.log( isAdmin ); // false
+
+
+//Максимальная зарплата
+
+let salarieS = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+  };
+
+// let tempArr = Object.entries(salarieS).sort((a,b) => a[1] - b[1]);
+// console.log(tempArr.at(-1)[0]);
+function maxSel (obj) {
+    let max = 0;
+    let answ = null;
+    for (let [name, sal] of Object.entries(obj)) {
+        if (sal > max) { 
+            answ = name;
+            max = sal;
+        }
+    }
+    return answ;
+}
+
+console.log(maxSel({}));
