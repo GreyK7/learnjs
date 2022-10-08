@@ -945,3 +945,13 @@ function maxSel (obj) {
 }
 
 console.log(maxSel({}));
+
+
+
+let id = Symbol('id');
+
+let rec = {
+};
+
+rec[id] = 1;
+
