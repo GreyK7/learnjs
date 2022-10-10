@@ -88,5 +88,100 @@
 // personaMovieDB.writeYourGenres();
 
 
-let d = new Date();
-console.log(d.getDay());
+// let date = new Date('2012-02-20T03:12:00.000+02:00');
+// let date = new Date(2012, 1, 20, 3, 12);
+// console.log(date);
+
+
+//Покажите день недели
+// let date = new Date(2012, 0, 3);  // 3 января 2012 года
+
+// function getWeekDay(date) {
+//     // let answ;
+//     // switch (date.getDay()) {
+//     //     case 0:
+//     //         answ = 'ВС';
+//     //         break;
+//     //     case 1:
+//     //         answ = 'ПН';
+//     //         break;
+//     //     case 2:
+//     //         answ = 'ВТ';
+//     //         break;
+//     //     case 3:
+//     //         answ = 'СР';
+//     //         break;
+//     //     case 4:
+//     //         answ = 'ЧТ';
+//     //         break;
+//     //     case 5:
+//     //         answ = 'ПТ';
+//     //         break;
+//     //     default:
+//     //         answ = 'СБ';
+//     //         break;
+//     // }
+//     // return answ;
+
+//     let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
+//     return days[date.getDay()];
+// }
+
+// console.log( getWeekDay(date) );
+
+//День недели в европейской нумерации
+
+// let date = new Date(2012, 0, 3);  // 3 января 2012 года
+
+// function getLocalDay(date) {
+//     let x = date.getDay();
+//     return x == 0 ? 7 : x;
+// }
+
+// console.log( getLocalDay(date) );
+
+
+//Какой день месяца был много дней назад?
+
+// let date = new Date(2015, 0, 2);
+
+// let getDateAgo = (date, days) => {
+//     let cloneDate = new Date(date);
+//     cloneDate.setDate(date.getDate() - days);
+//     return cloneDate.getDate();
+// };
+
+// console.log( getDateAgo(date, 1) ); // 1, (1 Jan 2015)
+// console.log( getDateAgo(date, 2) ); // 31, (31 Dec 2014)
+// console.log( getDateAgo(date, 365) ); // 2, (2 Jan 2014)
+
+
+
+//Последнее число месяца?
+
+// function getLastDayOfMonth(year, month) {
+//     let date = new Date(year, month + 1, 0);
+//     return date.getDate();
+// }
+
+// console.log(getLastDayOfMonth(2012, 1));
+
+
+///Сколько сегодня прошло секунд?
+
+function getSecondsToday() {
+    let date = new Date();
+    return date.getSeconds() + date.getMinutes() * 60 + date.getHours() * 3600;
+}
+
+console.log(getSecondsToday());
+
+///Сколько секунд осталось до завтра?
+
+function getSecondsToTomorrow() {
+    let today = new Date();
+    let tomorrow = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+    return (tomorrow.getTime() - today.getTime()) / 1000;
+}
+
+console.log(getSecondsToTomorrow());
