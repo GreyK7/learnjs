@@ -185,3 +185,26 @@ function getSecondsToTomorrow() {
 }
 
 console.log(getSecondsToTomorrow());
+
+
+
+///
+
+function formatDate(date) {
+    if ((Date.now() - date)  < 1000) return "rigth now";
+    if ((Date.now() - date) / 1000 < 60) return `${(Date.now() - date) / 1000} sec past`;
+    if ((Date.now() - date) / 60000 < 60) return `${(Date.now() - date) / 60000} min past`;
+    let d = [ '0' + date.getDate(), 
+        '0' + (date.getMonth() + 1),
+        '' + date.getFullYear() % 100,
+        '0' + date.getHours(),
+        '0' + date.getMinutes()
+        ].map(item => item.slice(-2));
+    return `${d.slice(0, 3).join('.')} ${d.slice(-2).join(':')}`;
+}
+
+console.log( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
+console.log( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
+console.log( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
+// вчерашняя дата вроде 31.12.2016, 20:00
+console.log( formatDate(new Date(new Date - 21600 * 1000)) );
