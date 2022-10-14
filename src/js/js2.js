@@ -208,3 +208,231 @@ console.log( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. наз
 console.log( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
 // вчерашняя дата вроде 31.12.2016, 20:00
 console.log( formatDate(new Date(new Date - 21600 * 1000)) );
+
+
+
+///Рекурсивный обход
+
+let company = {
+    sales: [{
+      name: 'John',
+      salary: 1000
+    }, {
+      name: 'Alice',
+      salary: 600
+    }],
+  
+    development: {
+      sites: [{
+        name: 'Peter',
+        salary: 2000
+      }, {
+        name: 'Alex',
+        salary: 1800
+      }],
+  
+      internals: [{
+        name: 'Jack',
+        salary: 1300
+      }]
+    }
+  };
+
+
+// function sumSalary(obj) {
+//     let sumAll = 0;
+//     for (let dep in obj) {
+//         if (Array.isArray(obj[dep])) {
+//             sumAll += obj[dep].reduce((sum, item) => sum + item.salary, 0);
+//         } else {
+//              return sumAll + sumSalary(obj[dep]);
+//         }
+//     }
+//     return sumAll;
+// }
+
+
+function sumSalaries(department) {
+    if (Array.isArray(department)) { // случай (1)
+      return department.reduce((prev, current) => prev + current.salary, 0); // сумма элементов массива
+    } else { // случай (2)
+      let sum = 0;
+      for (let subdep of Object.values(department)) {
+        sum += sumSalaries(subdep); // рекурсивно вызывается для подотделов, суммируя результаты
+      }
+      return sum;
+    }
+  }
+
+console.log(sumSalaries(company));
+
+
+///МАСССИВЫы
+
+// /**
+//   * Описание задачи: Напишите функцию, которая очищает массив от нежелательных значений, таких как false, undefined, пустые строки, ноль, null.
+//   * Ожидаемый результат: [0, 1, false, 2, undefined, '', 3, null] => [1, 2, 3]
+//   * Сложность задачи: 1 of 5
+//   * @param {Array} array - Массив любых элементов
+//   * @returns {Array}
+// */
+const compact = (array) => {
+  return array.filter(item => item);
+};
+ 
+ const data = [0, 1, false, 2, undefined, '', 3, null];
+ console.log(compact(data)); // [1, 2, 3]
+
+
+
+ /**
+  * Описание задачи: Напишите функцию, которая возвращает объект, составленный из значений вложенных массивов. Первое значение - ключ, второе - зачение.
+  * Ожидаемый результат: [['a', 1], ['b', 2]] => { a: 1, b: 2 }
+  * Сложность задачи: 2 of 5
+  * @param {Array} array - массив, значения которого массивы пар
+  * @returns {Array}
+*/
+const fromPairs = (array) => {
+    return array.reduce((answ, item) => { answ[item[0]] = item[1]; return answ;}, {});
+    // return Object.fromEntries(array);
+};
+ 
+ const d = [['a', 1], ['b', 2]];
+ console.log(fromPairs(d)); // { 'a': 1, 'b': 2 }
+
+
+//  /**
+//   * Описание задачи: Напишите функцию, возвращает новый массив без предоставленных значений. Используйте примитивные типы.
+//   * Ожидаемый результат: [1, 2, 3, 1, 2] без 1, 2 => [3]
+//   * Сложность задачи: 2 of 5
+//   * @param {Array} array - Массив с примитивными значениями
+//   * @param {?} args - лист значений для удаления
+//   * @returns {Array}
+// */
+const without = (array, ...args) => {
+  let newArr = [...array];
+  for (let i = 0; i < newArr.length; i++) {
+    if (args.includes(newArr[i])) {
+      newArr.splice(i, 1);
+      i--;
+    }
+  }
+  return newArr;
+};
+ 
+ const da = [1, 2, 3, 1, 2, 4, 4];
+ console.log(without(da, 1, 2, 3)); // [3]
+
+
+ /**
+  * Описание задачи: Напишите функцию, которая убирает повторяющиеся значения.
+  * Ожидаемый результат: [1, 2, 3, 1, 2] => [1, 2, 3]
+  * Сложность задачи: 2 of 5
+  * @param {Array<string | number>} array - Массив с примитивными значениями
+  * @returns {Array}
+*/
+const unique = (array) => {
+  let set = new Set(array);
+  return Array.from(set);
+};
+ 
+ const dat = [1, 2, 1, 2, 3];
+ console.log(unique(dat)); // [1, 2, 3]
+
+
+ /**
+  * Описание задачи: Напишите функцию, которая сравнивает два массива и возвращает true, если они идентичны.
+  * Ожидаемый результат: ([1, 2, 3], [1, 2, 3]) => true
+  * Сложность задачи: 2 of 5
+  * @param {Array} firstArray - Массив с примитивными значениями
+  * @param {Array} secondArray - Массив с примитивными значениями
+  * @returns {boolean}
+*/
+const isEqual = (firstArray, secondArray) => {
+  if (firstArray.length === secondArray.length) {
+    return firstArray.every((item, index) => item === secondArray[index]);
+  }
+  return false;
+};
+
+const arr1 = [1, 2, 3, 4];
+const arr2 = [1, 2, 3, 4];
+const arr3 = [1, 2, 3, 5];
+const arr4 = [1, 2, 3, 4, 5];
+console.log(isEqual(arr1, arr2)); // true
+console.log(isEqual(arr1, arr3)); // false
+console.log(isEqual(arr1, arr4)); // false
+
+
+/**
+  * Описание задачи: Напишите функцию, которая преобразует глубокий массив в одномерный.
+  * Ожидаемый результат: [1, 2, [3, 4, [5]]] => [1, 2, 3, 4, 5]
+  * Сложность задачи: 3 of 5
+  * @param {Array} array - Глубокий массив
+  * @returns {Array}
+*/
+const flatten = (array) => {
+   return array.reduce((res, item) => res.concat(Array.isArray(item) ? flatten(item) : item), []);
+ };
+
+
+ const data2 = [1, 2, [3, 4, [5]]];
+ console.log(flatten(data2)); // [1, 2, 3, 4, 5]
+
+
+
+ /**
+  * Описание задачи: Напишите функцию, которая разделяет массив на части заданного размера.
+  * Ожидаемый результат: ([1, 2, 3, 4, 5], 2) => [[1, 2], [3, 4], [5]]
+  * Сложность задачи: 3 of 5
+  * @param {Array} array - Массив элементов
+  * @param {number} size - Размер чанков
+  * @returns {Array}
+*/
+const chunk = (array, size) => {
+  let newArr = [];
+  for (let i = 0; i < array.length; i+=size) {
+    newArr.push(array.slice(i, i+size));
+  }
+  return newArr;
+};
+ 
+ const data3 = [1, 2, 3, 4, 5, 6, 7];
+ console.log(chunk(data3, 2)); // [[1, 2], [3, 4], [5, 6], [7]]
+ console.log(chunk(data3, 3)); // [[1, 2, 3], [4, 5, 6], [7]]
+
+
+
+/**
+  * Описание задачи: Напишите функцию, которая создаст массив из уникальных значений, которые есть в каждом из предоставленных массивов.
+  * Ожидаемый результат: ([1, 2], [2, 3]) => [2]
+  * Сложность задачи: 4 of 5
+  * @param {?} arrays - Массив примитивных значений
+  * @returns {Array}
+*/
+const intersection = (...arrays) => {
+  let newArr = [];
+  let counter = 0;
+  for (let i = 0; i < arrays[0].length; i++) {
+    for (let j = 1; j < arrays.length; j++) {
+      if (arrays[j].includes(arrays[0][i])) {
+        counter++;;
+      } else  break;
+    }
+    if (counter == arrays.length - 1 && !newArr.includes(arrays[0][i])) newArr.push(arrays[0][i]); 
+    counter = 0;
+  }
+  return newArr;
+};
+ 
+ const arr9 = [1, 2];
+ const arr10 = [2, 3];
+ const arr11 = ['a', 'b'];
+ const arr12 = ['b', 'c'];
+ const arr5 = ['b', 'e', 'c'];
+ const arr6 = ['b', 'b', 'e'];
+ const arr7 = ['b', 'c', 'e'];
+ const arr8 = ['b', 'e', 'c'];
+ console.log(intersection(arr9, arr10)); // [2]
+ console.log(intersection(arr11, arr12, arr5)); // ['b']
+ console.log(intersection(arr6, arr7, arr8)); // ['b', 'e']
