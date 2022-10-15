@@ -416,8 +416,8 @@ const intersection = (...arrays) => {
   for (let i = 0; i < arrays[0].length; i++) {
     for (let j = 1; j < arrays.length; j++) {
       if (arrays[j].includes(arrays[0][i])) {
-        counter++;;
-      } else  break;
+        counter++;
+      } else break;
     }
     if (counter == arrays.length - 1 && !newArr.includes(arrays[0][i])) newArr.push(arrays[0][i]); 
     counter = 0;
@@ -436,3 +436,101 @@ const intersection = (...arrays) => {
  console.log(intersection(arr9, arr10)); // [2]
  console.log(intersection(arr11, arr12, arr5)); // ['b']
  console.log(intersection(arr6, arr7, arr8)); // ['b', 'e']
+
+
+
+///РЕКУРСИЯ И СВЯЗНЫЕ СПИСКИ
+
+///Вычислить сумму чисел до данного
+
+// function sumTo(n) {
+//   if (n == 1) {
+//     return n;
+//   } else {
+//     return n + sumTo(n - 1);
+//   }
+// } // рекурсия
+
+function sumTo(n) {
+  let sum = 0;
+  for (let i = 1; i <= n; i++) {
+    sum += i;
+  }
+  return sum;
+} // цикл
+
+// function sumTo(n) {
+  // return n * (n + 1) /2;
+// } // арифметическая прогрессия
+
+console.log(sumTo(100));
+
+
+//factorial
+
+function factorial(n) {
+  if (n == 1) return n;
+  else {
+    return n * factorial(n - 1);
+  }
+}
+
+
+console.log(factorial(5));
+
+
+//fibona4i
+
+function fib(n) { 
+  let  a = 1;
+  let  b = 1;
+  let  c = 0;
+    for (let i = 3; i <= n; i++) {
+      c = a + b;
+      [a, b ] = [b, c];
+    }
+  return b;
+}
+
+// function fib(n) { 
+//   return n <= 1 ? n : fib(n - 1) + fib(n - 2);
+// } //rekursiya
+
+console.log(fib(3)); // 2
+console.log(fib(7)); // 13
+console.log(fib(77)); // 5527939700884757
+
+
+
+///Вывод односвязного списка
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
+};
+
+
+// function printList(list) {
+//   console.log(list.value);
+//   if (list.next) {
+//     printList(list.next);
+//   }
+// } //rekursiya
+
+function printList(list) {
+  let tmp = list;
+  while(tmp) {
+    console.log (tmp.value);
+    tmp = tmp.next;
+  }
+}
+
+printList(list);
