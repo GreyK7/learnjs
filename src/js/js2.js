@@ -518,6 +518,18 @@ let list = {
 };
 
 
+function twoSideList(list, prev = null) {
+  list.prev = prev;
+  if (list.next != null) {
+    twoSideList(list.next, list);
+  }
+} /// рекурсивное создание двусвязного списка
+
+twoSideList(list);
+
+console.log(list.next.next.next.prev.value);
+
+
 // function printList(list) {
 //   console.log(list.value);
 //   if (list.next) {
@@ -525,12 +537,48 @@ let list = {
 //   }
 // } //rekursiya
 
-function printList(list) {
-  let tmp = list;
-  while(tmp) {
-    console.log (tmp.value);
-    tmp = tmp.next;
+// function printList(list) {
+//   let tmp = list;
+//   while(tmp) {
+//     console.log (tmp.value);
+//     tmp = tmp.next;
+//   }
+// }
+
+// function printList(list) {
+//   let answ = [];
+//   let tmp = list;
+//   while(tmp) {
+//     answ.push(tmp.value);
+//     tmp = tmp.next;
+//   }
+//   answ.reverse().forEach(item => console.log(item));
+// }
+
+
+function printListReverse(list) {
+  if (list.next) {
+    printListReverse(list.next);
   }
+  console.log(list.value);
 }
 
-printList(list);
+printListReverse(list);
+
+
+
+function makeWorker() {
+  let naame = "Pete";
+
+  return function() {
+    console.log(naame);
+  };
+}
+
+let naame = "John";
+
+// create a function
+let work = makeWorker();
+
+// call it
+work();
