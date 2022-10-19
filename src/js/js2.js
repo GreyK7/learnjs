@@ -582,3 +582,75 @@ let work = makeWorker();
 
 // call it
 work();
+
+
+/// сумма с помощью замыкания
+function sum(a) {
+  return function(b) {
+    return a + b;
+  };
+}
+
+console.log(sum(1)(6));
+
+///расширение методов фильтрации массивов
+let arr = [1, 2, 3, 4, 5, 6, 7];
+
+function inBetween(a, b) {
+  return function(item) {
+    return item >= a && item <= b;
+  }; 
+}
+
+function inArray(arr) {
+  return function(item) {
+    return arr.includes(item);
+  };
+}
+
+console.log(arr.filter(inBetween(3, 6)));
+console.log(arr.filter(inArray([1, 2, 3])));
+
+
+
+////сортировка по полю
+let users = [
+  { name: "John", age: 20, surname: "Johnson" },
+  { name: "Pete", age: 18, surname: "Peterson" },
+  { name: "Ann", age: 19, surname: "Hathaway" }
+];
+
+function byField(field) {
+    return function(a, b) {
+      return a[field] > b[field] ? 1 : -1;
+    };
+}
+
+users.sort(byField('name'));
+console.log(users);
+users.sort(byField('age'));
+console.log(users);
+
+
+
+///армия стрелков 
+function makeArmy() {
+  let shooters = [];
+  let i = 0;
+
+  while (i < 10) {
+    let y = i;
+    let shooter = function() { // функция shooter
+      console.log(y); // должна выводить порядковый номер
+    };
+    shooters.push(shooter);
+    i++;
+  }
+
+  return shooters;
+}
+
+let army = makeArmy();
+
+army[0](); // у 0-го стрелка будет номер 10
+army[5]();
